@@ -10,7 +10,7 @@ window.onload = function () {
     exportEnabled: true,
     theme: "light2",
     title:{
-      text:"StockChart with Tooltip & Crosshair Syncing"
+      text:"StockChart"
     },
     charts: [{
       toolTip: {
@@ -98,9 +98,9 @@ window.onload = function () {
 <div id="chartContainer" style="height: 500px; width: 100%;"></div>
 //////////////////////////////tradingView///////////////////////////////////
 <div>
-  <!-- TradingView Widget BEGIN -->
+<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div id="tradingview_873f9"></div>
+  <div id="tradingview_c1a74"></div>
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
   <script type="text/javascript">
@@ -108,7 +108,7 @@ window.onload = function () {
   {
   "autosize": true,
   "symbol": "NASDAQ:AAPL",
-  "timezone": "UTC +6",
+  "timezone": "Etc/UTC",
   "theme": "light",
   "style": "1",
   "locale": "en",
@@ -116,14 +116,15 @@ window.onload = function () {
   "enable_publishing": true,
   "withdateranges": true,
   "range": "YTD",
-  "hide_side_toolbar": true,
+  "hide_side_toolbar": false,
   "allow_symbol_change": true,
   "details": true,
   "hotlist": true,
+  "calendar": true,
   "show_popup_button": true,
   "popup_width": "1000",
   "popup_height": "650",
-  "container_id": "tradingview_873f9"
+  "container_id": "tradingview_c1a74"
 }
   );
   </script>

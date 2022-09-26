@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -12,10 +13,18 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $stock = Stock::all();
-        return response()->json($stock);
+        // $stock = Stock::all();
+     $start_date = Carbon::parse($request->start_date)
+                             ->toDateTimeString();
+
+       $end_date = Carbon::parse($request->end_date)
+                             ->toDateTimeString();
+
+       return Stock::whereBetween('date',[$start_date,$end_date])->get();
+
+        // return response()->json($stock);
     }
 
     /**
