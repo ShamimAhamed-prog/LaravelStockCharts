@@ -15,16 +15,15 @@ class StockController extends Controller
      */
     public function index(Request $request)
     {
-        // $stock = Stock::all();
-     $start_date = Carbon::parse($request->start_date)
-                             ->toDateTimeString();
+        $start_date = Carbon::parse($request->start_date)
+            ->toDateTimeString();
 
-       $end_date = Carbon::parse($request->end_date)
-                             ->toDateTimeString();
-
-       return Stock::whereBetween('date',[$start_date,$end_date])->get();
-
-        // return response()->json($stock);
+        $end_date = Carbon::parse($request->end_date)
+            ->toDateTimeString();
+            
+      $datadate = Stock::whereBetween('index_date',[$start_date,$end_date])
+                 ->where('instrument_id', $request->instrument)->get();
+       return response()->json($datadate);
     }
 
     /**

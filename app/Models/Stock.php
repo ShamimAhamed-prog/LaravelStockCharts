@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     use HasFactory;
-    protected $table = 'stocks';
-    protected $fillable = ['date','open','high','low','close','volume_btc','volume_usd'];
+    protected $table = 'index_values';
+    protected $fillable = ['id', 'market_id', 'instrument_id', 'capital_value', 'deviation', 'percentage_deviation', 'date_time', 'index_date', 'index_time'];
 }
