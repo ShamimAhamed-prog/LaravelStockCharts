@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class StockController extends Controller
 {
     /**
@@ -20,12 +20,22 @@ class StockController extends Controller
 
         $end_date = Carbon::parse($request->end_date)
             ->toDateTimeString();
-            
-      $datadate = Stock::whereBetween('index_date',[$start_date,$end_date])
-                 ->where('instrument_id', $request->instrument)->get();
-       return response()->json($datadate);
-    }
+    
+     $datadate = DB::table('index_values')
+            ->join('instruments', 'instruments.id','=','index_values.instrument_id')
+            ->select('index_values.*','instruments.name')
+            ->whereBetween('index_date', [$start_date, $end_date])
+            ->where('instrument_id', $request->instrument)
+            ->get();
 
+
+        // $datadate = Stock::whereBetween('index_date', [$start_date, $end_date])
+        //      ->join('instruments', 'index_values.instrument_id', '=', 'instruments.name')
+        //      ->where('instrument_id', $request->instrument)
+        //      ->select('id', 'market_id', 'instrument_id', 'capital_value', 'deviation', 'date_time', 'index_date')
+        //      ->get();
+        return response()->json($datadate);
+    }
     /**
      * Show the form for creating a new resource.
      *
