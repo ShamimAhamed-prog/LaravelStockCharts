@@ -13,7 +13,7 @@ class Stock extends Model
     protected $fillable = ['id', 'market_id', 'instrument_id', 'capital_value', 'deviation', 'percentage_deviation', 'date_time', 'index_date', 'index_time'];
 
     public function instrument(){
-        return $this->belongsTo(Instrument::class);
+        return $this->belongsTo(Instrument::class)->select(['id', 'name']);
     }
 }
 
