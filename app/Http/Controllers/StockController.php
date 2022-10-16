@@ -6,6 +6,7 @@ use App\Models\Stock;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Instrument;
 class StockController extends Controller
 {
     /**
@@ -21,12 +22,31 @@ class StockController extends Controller
         $end_date = Carbon::parse($request->end_date)
             ->toDateTimeString();
     
-     $datadate = DB::table('index_values')
-            ->join('instruments', 'instruments.id','=','index_values.instrument_id')
-            ->select('index_values.*','instruments.name')
+        // $datadate = DB::table('index_values')
+        //     ->join('instruments', 'instruments.id','=','index_values.instrument_id')
+        //     ->select('index_values.*','instruments.name')
+        //     ->whereBetween('index_date', [$start_date, $end_date])
+        //     ->where('instrument_id', $request->instrument)
+        //     ->get();
+
+            // $datadate = Stock::with('instrument')
+            // ->select('index_values.*','instruments.name')
+            // ->whereBetween('index_date', [$start_date, $end_date])
+            // ->where('instrument_id', $request->instrument)
+            // ->get();
+            
+            $datadate = Stock::with('instrument')
+            // ->select('index_values.*','instrument.name')
             ->whereBetween('index_date', [$start_date, $end_date])
             ->where('instrument_id', $request->instrument)
             ->get();
+
+ 
+            // $datadate = Stock::join('instruments', 'instruments.id','=','index_values.instrument_id')
+            // ->select('index_values.*','instruments.name')
+            // ->whereBetween('index_date', [$start_date, $end_date])
+            // ->where('instrument_id', $request->instrument)
+            // ->get();
 
 
         // $datadate = Stock::whereBetween('index_date', [$start_date, $end_date])

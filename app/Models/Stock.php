@@ -12,7 +12,7 @@ class Stock extends Model
     protected $table = 'index_values';
     protected $fillable = ['id', 'market_id', 'instrument_id', 'capital_value', 'deviation', 'percentage_deviation', 'date_time', 'index_date', 'index_time'];
 
-    public function investor(){
+    public function instrument(){
         return $this->belongsTo(Instrument::class);
     }
 }
