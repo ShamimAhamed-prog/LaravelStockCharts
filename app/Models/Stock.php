@@ -16,5 +16,3 @@ class Stock extends Model
         return $this->belongsTo(Instrument::class)->select(['id', 'name']);
     }
 }
-
-

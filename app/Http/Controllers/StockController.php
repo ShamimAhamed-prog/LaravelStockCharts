@@ -29,14 +29,7 @@ class StockController extends Controller
         //     ->where('instrument_id', $request->instrument)
         //     ->get();
 
-            // $datadate = Stock::with('instrument')
-            // ->select('index_values.*','instruments.name')
-            // ->whereBetween('index_date', [$start_date, $end_date])
-            // ->where('instrument_id', $request->instrument)
-            // ->get();
-            
             $datadate = Stock::with('instrument')
-            // ->get('index_values.*','instrument.name')
             ->whereBetween('index_date', [$start_date, $end_date])
             ->where('instrument_id', $request->instrument)
             ->get();
