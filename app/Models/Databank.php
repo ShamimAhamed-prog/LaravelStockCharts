@@ -9,5 +9,5 @@ class Databank extends Model
 {
     use HasFactory;
     protected $table = 'data_banks_eods';
-    protected $fillable = ['id','open','high', 'low','close','volume'];		 
+    protected $fillable = ['id','open','high', 'low','close','volume','date'];		 
 }

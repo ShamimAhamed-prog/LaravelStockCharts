@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Instrument;
+Use App\Models\PriceTicker;
 class StockController extends Controller
 {
     /**
@@ -30,7 +31,7 @@ class StockController extends Controller
         //     ->get();
 
             $datadate = Stock::with('instrument')
-            ->whereBetween('index_date', [$start_date, $end_date])
+             ->whereBetween('index_date', [$start_date, $end_date])
             ->where('instrument_id', $request->instrument)
             ->get();
 
@@ -114,4 +115,17 @@ class StockController extends Controller
     {
         //
     }
+     
+    public function Priceticker(Request $request)
+    {
+            $date = Carbon::parse($request->date)
+            ->toDateTimeString();
+
+            $datadate = PriceTicker::with('instrument')
+            ->where('date', [$date])
+            ->get();
+
+       return response()->json($datadate);
+    }
+
 }

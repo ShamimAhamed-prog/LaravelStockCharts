@@ -18,4 +18,6 @@ use App\Http\Controllers\StockController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/stocks',[StockController::class, 'index']);
+Route::get('/priceticker',[StockController::class, 'Priceticker']);
