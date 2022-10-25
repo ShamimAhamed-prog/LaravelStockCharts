@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Instrument;
 Use App\Models\PriceTicker;
+use App\Models\Sector;
+
 class StockController extends Controller
 {
     /**
@@ -121,10 +123,21 @@ class StockController extends Controller
             $date = Carbon::parse($request->date)
             ->toDateTimeString();
 
-            $datadate = PriceTicker::with('instrument')
-            ->where('date', [$date])
-            ->get();
+            // $datadate = PriceTicker::with('instrument')
+            // ->where('date', [$date])
+            // ->with('sector')
+            // ->join('sector.id', '=','instrument.sector_list_id')
+            // ->get();
 
+            // table join
+
+            $datadate = DB::table('data_banks_eods')
+             ->join('instruments','instruments.id','=','data_banks_eods.instrument_id')
+            ->join('sector','sector.id','=','instruments.sector_list_id')
+            ->where('data_banks_eods.date', [$date])
+            ->select('data_banks_eods.id','data_banks_eods.open','data_banks_eods.high', 'data_banks_eods.low','data_banks_eods.close','data_banks_eods.volume','data_banks_eods.date','sector.id','instruments.name as InstrumentName','sector.name as SectorName')
+            ->get();
+        // dd($datadate);
        return response()->json($datadate);
     }
 

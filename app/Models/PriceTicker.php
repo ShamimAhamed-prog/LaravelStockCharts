@@ -20,7 +20,7 @@ class PriceTicker extends Model
         return $this->belongsTo(Company::class)->select(['lasttradeprice', 'yclose']);
     }
     public function instrument(){
-        return $this->belongsTo(Instrument::class)->select(['id','name']);
+        return $this->belongsTo(Instrument::class,)->select(['id','name','sector_list_id']);
     }
     public function sector(){
         return $this->belongsTo(Sector::class)->select(['id', 'name']);
